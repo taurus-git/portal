@@ -1,0 +1,10 @@
+[default]
+name=Default
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/user/.cache/gnome-builder/install/twentyseventeen/host
+app-id=
+postbuild=
+prebuild=
+default=true
