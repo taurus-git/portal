@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c484bf6-fa71-4070-93bf-4c760d07bf31" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/wp-content/themes/hyperionportal/page-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/Custom_user_profile/custom-user-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/Custom_user_profile/custom-user-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/hyperionportal/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/hyperionportal/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/hyperionportal/page-contacts.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/hyperionportal/page-contacts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/hyperionportal/sidebar-main.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/hyperionportal/sidebar-main.php" afterDir="false" />
-    </list>
+    <list default="true" id="4c484bf6-fa71-4070-93bf-4c760d07bf31" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,12 +159,12 @@
       <workItem from="1556261876341" duration="16958000" />
       <workItem from="1556350772539" duration="4663000" />
       <workItem from="1556355735166" duration="5154000" />
-      <workItem from="1556360970434" duration="12612000" />
+      <workItem from="1556360970434" duration="13173000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45516000" />
+    <option name="totallyTimeSpent" value="46077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
