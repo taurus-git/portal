@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
             position: position,
         };
 
-        jQuery.post(ajax_name.url, data, function (response) {
+        jQuery.post(ajaxurl, data, function (response) {
             alert("Success: " + position );
             $("<div class=\"position_row\">" +
                 "<input name='position' data-positionid='' class='position-input' type='text' value=\"" + position + "\" disabled></<input>" +
@@ -49,7 +49,7 @@ jQuery(document).ready(function ($) {
                 name: name,
                 id: id,
             };
-            jQuery.post(ajax_name.url, data, function (response) {
+            jQuery.post(ajaxurl, data, function (response) {
                 $input.prop( "disabled", true);
                 $this.text( 'Edit' );
             });
@@ -73,7 +73,7 @@ jQuery(document).ready(function ($) {
                 action: 'delete_position',
                 id: id,
             };
-            jQuery.post( ajax_name.url, data, function(response) {
+            jQuery.post( ajaxurl, data, function(response) {
             });
             $this.parents(".position_row").fadeOut(1000);
         } else {

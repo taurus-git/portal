@@ -108,9 +108,8 @@
                             $res = $result->team;
                             echo '<b>' . $res . '</b><br>';
                         }
-                        echo '<p>' . get_avatar( $result->id, 40) . ' ' . $result->first_name . ' ' .
-                            $result->last_name .
-                            '</p>';
+                        echo '<p>' . get_wp_user_avatar( $result->id,'user-thumb' ) .
+                            ' ' . $result->first_name . ' ' . $result->last_name . '</p>';
 
                         $users_positions_array = array();
                         $users_positions_array = get_the_author_meta('position', $result->id );
@@ -119,7 +118,7 @@
                         foreach ($positions as $position) {
                             $user_positions = in_array($position->id, $users_positions_array);
                             if ($user_positions) {
-                                echo '<pre>'. $position->name . ' ' . '</pre>';
+                                echo '<pre>('. $position->name . ')</pre>';
                             }
                         }
                         echo '<hr><br>';

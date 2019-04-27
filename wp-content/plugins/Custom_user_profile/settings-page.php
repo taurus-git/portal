@@ -9,7 +9,7 @@
  * USERS SIDE
  *
  * */
-
+//include templates/user.php
 function cup_additional_profile_fields( $user ) {
     //Birthday data
     $months 	= array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
@@ -134,24 +134,27 @@ function cup_additional_profile_fields( $user ) {
 
                 $users_positions_array = array();
                 $users_positions_array = get_the_author_meta('position', $user->ID );
-
+                $users_positions_array_integer = array_map('intval',  $users_positions_array);
                 foreach ($positions as $position) {
-                    if ( empty($users_positions_array) ) {
+                    $checked = ( in_array($position->id, $users_positions_array_integer) ) ? 'checked' : '';
+                    if ( $checked ) {
+                        echo '<div>
+                                <label>
+                                    <input type="checkbox" name="position[]" value="'. $position->id . '"' . $checked
+                        . '>' .
+                            $position->name
+                            .  '</label>
+                              </div>';
+                    } else {
+                        //$checked = ( in_array($position->id, $users_positions_array_integer) ) ? 'checked' : '';
+
                         echo '<div>
                                 <label>
                                     <input type="checkbox" name="position[]" value="'. $position->id . '">' .
                             $position->name
                             .  '</label>
                               </div>';
-                    } else {
-                        $users_positions_array_integer = array_map('intval',  $users_positions_array);
-                        $checked = ( in_array($position->id, $users_positions_array_integer) ) ? 'checked' : '';
-                        echo '<div>
-                                <label>
-                                    <input type="checkbox" name="position[]" value="'. $position->id . '"' . $checked . '>' .
-                            $position->name
-                            .  '</label>
-                              </div>';
+
                     }
                 }
                 ?>
@@ -169,7 +172,7 @@ function cup_additional_profile_fields( $user ) {
                           <div><input type="tel" name="phone[]" value="" placeholder="097 111 22 33"></div>';
                 } else {
                     for ( $i = 0; $i < count($users_phones_array); $i++) {
-                        echo '<div><input type="tel" name="phone[]" value="' .  $users_phones_array[$i] . '" placeholder="095 111 22 33"></div>';
+                        echo '<div><input type="tel" name="phone[]" value="' .  $users_phones_array[$i] . '"></div>';
                     };
                 }
                 ?>
@@ -198,42 +201,42 @@ add_action( 'edit_user_profile', 'cup_additional_profile_fields' );//Добав�
  */
 function cup_save_profile_fields( $user_id ) {
 
-    $birth_date = $_POST['birth_date'];
-    if ( isset($birth_date) ) {
-        update_user_meta($user_id, 'birth_date', $birth_date);
+    if ( isset( $_POST['birth_date'] ) ) {
+        $birth_date = $_POST['birth_date'];
+        update_user_meta( $user_id, 'birth_date', $birth_date );
     }
-    //$team = $_POST['team'];
-    if ( isset($_POST['team']) ) {
-        update_user_meta($user_id, 'team', $_POST['team']);
+    if ( isset( $_POST['team'] ) ) {
+        $team = $_POST['team'];
+        update_user_meta( $user_id, 'team', $team );
     }
-    $product_owner = $_POST['po'];
-    if ( isset($product_owner) ) {
-        update_user_meta($user_id, 'po', $product_owner);
+    if ( isset( $_POST['po'] ) ) {
+        $product_owner = $_POST['po'];
+        update_user_meta( $user_id, 'po', $product_owner );
     }
-    $floor = $_POST['floor'];
-    if ( isset($floor) ) {
-        update_user_meta($user_id, 'floor', $floor);
+    if ( isset( $_POST['floor'] ) ) {
+        $floor = $_POST['floor'];
+        update_user_meta( $user_id, 'floor', $floor );
     }
     //add array of checked items by user to db
-    $users_positions = $_POST['position'];
-    if ( isset($users_positions) ) {
-        $users_positions = array();
+    if ( isset( $_POST['position'] ) ) {
+        $users_positions = $_POST['position'];
+        /*$users_positions = array();
 
         foreach ($_POST['position'] as $check) {
             $users_positions[] = $check;
-        }
-        update_user_meta($user_id, 'position', $users_positions);
+        }*/
+        update_user_meta( $user_id, 'position', $users_positions );
+    } else {
+        update_user_meta( $user_id, 'position', array() );
     }
-    $phone = $_POST['phone'];
-    if ( isset($phone) ) {
-        update_user_meta($user_id, 'phone', $_POST['phone']);
+    if ( isset( $_POST['phone'] ) ) {
+        $phone = $_POST['phone'];
+        update_user_meta( $user_id, 'phone', $phone );
     }
-    $skype = $_POST['skype'];
-    if ( isset($skype) ) {
-        update_user_meta($user_id, 'skype', $skype);
+    if ( isset($_POST['skype']) ) {
+        $skype = $_POST['skype'];
+        update_user_meta( $user_id, 'skype', $skype );
     }
-    //
-
 };
 
 add_action( 'personal_options_update', 'cup_save_profile_fields' );
@@ -283,12 +286,14 @@ function company_settings_options_page() {
     add_submenu_page('company_settings', 'Settings floors', 'Floors', 'manage_options', 'settings_floors', 'floor_options_page_output');
 }
 add_action( 'admin_menu', 'company_settings_options_page' );
-
-function company_settings_page ( ) {?>
+function company_settings_page ( ) {
+    ?>
     <h2>Info:</h2>
-<?php }
+    <?php
+}
 
-function cup_positions_options_page_html() {?>
+function cup_positions_options_page_html() {
+    ?>
     <!--Choose positions -->
     <h2>Add new position:</h2>
     <div style="width: 450px; vertical-align: top;">
@@ -324,9 +329,9 @@ function add_cup_scripts() {
     wp_enqueue_script( 'functions-js', plugins_url('functions.js', __FILE__) , array( 'jquery' ), '1.0', true );
 
     /** Localize Scripts */
-    wp_localize_script( 'functions-js', 'ajax_name', array(
+    /*wp_localize_script( 'functions-js', 'ajax_name', array(
         'url' => admin_url('admin-ajax.php'),
-    ) );
+    ) );*/
 }
 
 //send data to db
@@ -334,12 +339,11 @@ add_action( 'wp_ajax_add_new_position', 'add_new_position_callback' );
 function add_new_position_callback() {
     $positions_array = array();
     $result = get_option('position');
-
     if( $result ) {
-        $result_array = (array)json_decode( $result );
-        $result_array_last_key = count(array_column($result_array, 'id'));
-
-        $result_array[] = array('id' => $result_array_last_key + 1, 'name' => $_POST['position']);
+        $result_array = json_decode( $result );
+        $last_key = array_key_last($result_array);
+        $last_id = $result_array[$last_key]->id;
+        $result_array[] = array('id' => $last_id + 1, 'name' => $_POST['position']);
         $positions_array = $result_array;
     } else {
         $positions_array[] = array('id' => 0, 'name' => $_POST['position']);
