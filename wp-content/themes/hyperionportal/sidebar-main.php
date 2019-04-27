@@ -12,9 +12,10 @@
 
 if ( ! is_active_sidebar( 'sidebar-main' ) ) {
     return;
-}
-?>
+} else { ?>
+    <aside id="secondary" class="widget-area" role="complementary" aria-label="<?php esc_attr_e( 'Blog Sidebar', 'portal' ); ?>">
+        <?php dynamic_sidebar( 'sidebar-main' ); ?>
+    </aside><!-- #secondary -->
+<?php  } ?>
 
-<aside id="secondary" class="widget-area" role="complementary" aria-label="<?php esc_attr_e( 'Blog Sidebar', 'twentyseventeen' ); ?>">
-    <?php dynamic_sidebar( 'sidebar-main' ); ?>
-</aside><!-- #secondary -->
+

@@ -15,8 +15,8 @@ include ( 'init.php' );
 include ( 'settings-page.php' );
 
 // Hooks
-add_action( 'init', 'team_init' );
-add_action( 'init', 'po_init' );
+//add_action( 'init', 'team_init' );
+//add_action( 'init', 'po_init' );
 
 
 

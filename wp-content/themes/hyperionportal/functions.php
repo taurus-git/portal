@@ -175,12 +175,12 @@ function get_users_on_floor(){
     wp_die();
 }
 
-if ( function_exists( 'add_theme_support' ) ) {
-    add_theme_support( 'post-thumbnails' );
-    set_post_thumbnail_size( 150, 150 ); // размер миниатюры поста по умолчанию
-}
+//if ( function_exists( 'add_theme_support' ) ) {
+//    add_theme_support( 'post-thumbnails' );
+//    set_post_thumbnail_size( 150, 150 ); // размер миниатюры поста по умолчанию
+//}
 
-if ( function_exists( 'add_image_size' ) ) {
+/*if ( function_exists( 'add_image_size' ) ) {
     add_image_size( 'user-thumb', 9999, 40 ); // 300 в ширину и без ограничения в высоту
     //add_image_size( 'homepage-thumb', 220, 180, true ); // Кадрирование изображения
-}
+}*/

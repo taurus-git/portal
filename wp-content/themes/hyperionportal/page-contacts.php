@@ -58,7 +58,6 @@
                         if ( $query->have_posts() ) {
                             while ( $query->have_posts() ) {
                                 $query->the_post();
-
                                 echo '<button type="button" class="btn btn-outline-dark btn-sm">'
                                     . get_the_title() . '</button>';
                             }
@@ -108,9 +107,9 @@
                             $res = $result->team;
                             echo '<b>' . $res . '</b><br>';
                         }
-                        echo '<p>' . get_avatar( $result->id, 40) . ' ' . $result->first_name . ' ' .
-                            $result->last_name .
-                            '</p>';
+                        var_dump( $result );
+                        echo '<p>' . get_avatar( $result->id, 40) . ' ' . '<a href="/profile?id=' . $result->id . '">' . $result->first_name . '</a> '
+                            . '<a href="/profile?id=' . $result->id . '">' . $result->last_name . '</a></p>';
 
                         $users_positions_array = array();
                         $users_positions_array = get_the_author_meta('position', $result->id );
