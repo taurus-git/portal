@@ -58,6 +58,7 @@
                         if ( $query->have_posts() ) {
                             while ( $query->have_posts() ) {
                                 $query->the_post();
+
                                 echo '<button type="button" class="btn btn-outline-dark btn-sm">'
                                     . get_the_title() . '</button>';
                             }
@@ -107,9 +108,8 @@
                             $res = $result->team;
                             echo '<b>' . $res . '</b><br>';
                         }
-                        var_dump( $result );
-                        echo '<p>' . get_avatar( $result->id, 40) . ' ' . '<a href="/profile?id=' . $result->id . '">' . $result->first_name . '</a> '
-                            . '<a href="/profile?id=' . $result->id . '">' . $result->last_name . '</a></p>';
+                        echo '<p>' . get_wp_user_avatar( $result->id,'user-thumb' ) .
+                            ' ' . $result->first_name . ' ' . $result->last_name . '</p>';
 
                         $users_positions_array = array();
                         $users_positions_array = get_the_author_meta('position', $result->id );
@@ -118,7 +118,7 @@
                         foreach ($positions as $position) {
                             $user_positions = in_array($position->id, $users_positions_array);
                             if ($user_positions) {
-                                echo '<pre>'. $position->name . ' ' . '</pre>';
+                                echo '<pre>'. $position->name . '</pre>';
                             }
                         }
                         echo '<hr><br>';

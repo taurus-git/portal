@@ -1,5 +1,5 @@
 <?php
-//Init Team custom post type
+
 add_action('init', 'team_init');
 function team_init(){
     register_post_type('team', array(
@@ -32,7 +32,7 @@ function team_init(){
         'supports'           => array('title','editor','thumbnail')
     ) );
 }
-//Init Product Owner custom post type
+
 add_action('init', 'po_init');
 function po_init(){
     register_post_type('po', array(

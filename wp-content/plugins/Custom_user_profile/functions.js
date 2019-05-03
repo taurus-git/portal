@@ -1,5 +1,4 @@
 jQuery(document).ready(function ($) {
-    //send form data
     $("#submitFormButton").on("click", (function (event) {
         event.preventDefault();
 
@@ -10,7 +9,7 @@ jQuery(document).ready(function ($) {
             position: position,
         };
 
-        jQuery.post(ajax_name.url, data, function (response) {
+        jQuery.post(ajaxurl, data, function (response) {
             alert("Success: " + position );
             $("<div class=\"position_row\">" +
                 "<input name='position' data-positionid='' class='position-input' type='text' value=\"" + position + "\" disabled></<input>" +
@@ -20,12 +19,10 @@ jQuery(document).ready(function ($) {
         })
     }));
 
-    //change input value and text on button
     $(".edit-save").on("click", function (event) {
         event.preventDefault();
         var $this = $(this);
 
-        //toggle input status (enabled / disabled)
         var $input = $this.prev();
         if ( $input.prop( "disabled") ) {
             $input.prop( "disabled", false);
@@ -33,14 +30,13 @@ jQuery(document).ready(function ($) {
             $this.removeClass( "btn-outline-info" );
             $this.addClass( "btn-outline-primary" );
         } else {
-            //change class of the button
+
             $this.removeClass( "btn-outline-primary" );
             $this.addClass( "btn-outline-info" );
 
-            //get edited input
             var name = $input.val();
             console.log(name);
-            //get position id from data attr
+
             var id = $input.attr( 'data-positionid' );
             console.log(id);
 
@@ -49,13 +45,13 @@ jQuery(document).ready(function ($) {
                 name: name,
                 id: id,
             };
-            jQuery.post(ajax_name.url, data, function (response) {
+            jQuery.post(ajaxurl, data, function (response) {
                 $input.prop( "disabled", true);
                 $this.text( 'Edit' );
             });
         }
     });
-    //remove post
+
     $('.delete_position').on('click', function(event){
         event.preventDefault();
 
@@ -73,7 +69,7 @@ jQuery(document).ready(function ($) {
                 action: 'delete_position',
                 id: id,
             };
-            jQuery.post( ajax_name.url, data, function(response) {
+            jQuery.post( ajaxurl, data, function(response) {
             });
             $this.parents(".position_row").fadeOut(1000);
         } else {

@@ -2,10 +2,10 @@
 add_action( 'wp_enqueue_scripts', 'hyperion_theme_scripts' );
 
 function hyperion_theme_scripts() {
-    /*styles*/
+
     wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.css' );
     wp_enqueue_style( 'main-style', get_stylesheet_uri() );
-    /*scripts*/
+
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', get_template_directory_uri() . '/assets/js/jquery-3.3.1.min.js');
     wp_enqueue_script( 'jquery', '', '', '', 'true' );
@@ -20,6 +20,7 @@ function myajax_data(){
 }
 
 add_theme_support( 'post-thumbnails' );
+add_image_size('user-thumb', 40, 40, true);
 
 add_action( 'widgets_init', 'hyperionportal_widgets_init' );
 function hyperionportal_widgets_init() {
@@ -38,7 +39,7 @@ add_action( 'wp_ajax_nopriv_search_user', 'search_user_callback' );
 add_action('wp_ajax_search_user', 'search_user_callback');
 function search_user_callback(){
     $searchQuery = $_POST['request'];
-    //Get first and last NAMES
+
     $search_name = array(
         'meta_query' => array(
             'relation' => 'OR',
@@ -57,10 +58,10 @@ function search_user_callback(){
         $my_user_query = new WP_User_Query($search_name);
         $user_names = $my_user_query->get_results();
         $output = '<div>' . 'Result of searching by' . '<b> Name </b>' . 'fields:' . '</div>';
-        // Check for user_names
+
         if (!empty($user_names)) {
             $output .= '<ul class="user_names-list">';
-            // Loop over user_names.
+
             foreach ($user_names as $user_name) {
                 $user_name_info = get_userdata($user_name->ID);
                 $output .= '<li><span>User Name: ' . $user_name_info->display_name . '</span></li>';
@@ -69,7 +70,7 @@ function search_user_callback(){
             }
             $output .= '</ul>';
         } else {
-            // Display "no user_names found" message.
+
             $output .=  __('<p>' . 'No user_names found!' . '</p>');
         }
     echo $output;
@@ -81,7 +82,7 @@ add_action('wp_ajax_search_user_skype', 'search_user_skype');
 function search_user_skype(){
     $searchQuery = $_POST['request'];
 
-    //Get skype nicks
+
     $search_skype_login = array(
         'meta_query' => array(
             array(
@@ -95,10 +96,8 @@ function search_user_skype(){
     $user_skype_logins = $my_user_query->get_results();
     $output = '<div>' . 'Result of searching by' . '<b> Skype field: </b>' . '</div>';
 
-    // Check for user_skype_logins
     if ( ! empty( $user_skype_logins ) ) {
         $output .= '<ul class="user_skype_logins-list">';
-        // Loop over user_skype_logins.
 
         foreach ( $user_skype_logins as $user_skype_login ) {
             $user_skype_info = get_userdata( $user_skype_login->ID );
@@ -107,7 +106,6 @@ function search_user_skype(){
         }
         echo '</ul>';
     } else {
-        // Display "no user_skype_logins found" message.
         $output .=  __( '<p>' . 'No user_skype_logins found!' . '</p>');
     }
     echo $output;
@@ -118,7 +116,7 @@ add_action( 'wp_ajax_nopriv_search_user_nickname', 'search_user_nickname' );
 add_action('wp_ajax_search_user_nickname', 'search_user_nickname');
 function search_user_nickname(){
     $searchQuery = $_POST['request'];
-    //Get Nicknames
+
     $search_nicknames = array(
         'search' => '*' . $searchQuery . '*',
     );
@@ -168,19 +166,10 @@ function get_users_on_floor(){
         }
         $output .= '</ul>';
     } else {
-        // Display "no users found" message.
         $output .=  __( '<p>' . 'No users found on this floor!' . '</p>');
     }
     echo $output;
     wp_die();
 }
 
-//if ( function_exists( 'add_theme_support' ) ) {
-//    add_theme_support( 'post-thumbnails' );
-//    set_post_thumbnail_size( 150, 150 ); // размер миниатюры поста по умолчанию
-//}
 
-/*if ( function_exists( 'add_image_size' ) ) {
-    add_image_size( 'user-thumb', 9999, 40 ); // 300 в ширину и без ограничения в высоту
-    //add_image_size( 'homepage-thumb', 220, 180, true ); // Кадрирование изображения
-}*/
